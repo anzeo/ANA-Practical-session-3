@@ -62,8 +62,8 @@ def min_cut(G):
 
 if __name__ == '__main__':
     directory = 'tests'
-    REPEATS = 10  # število ponovitev iskanja optimalne rešitve
-
+    REPEATS = 5  # število ponovitev iskanja optimalne rešitve
+    # start = time.time()
     print("{:<15}|{:>15} |{:>11} |{:>11} ".format('name', '(n,m)', 'opt', 'avg. runs'))
     for filename in sorted(os.listdir(directory)):
         f = os.path.join(directory, filename)
@@ -78,7 +78,7 @@ if __name__ == '__main__':
             else:
                 # za večje grafe, čim večkrat poženemo min_cut algoritem in iščemo najmanjšo velikost rešitve
                 opt = n_m[1]
-                for i in range(40):
+                for i in range(50):
                     opt = min(opt, len(min_cut(G)))
 
             avg_runs = 0
@@ -94,17 +94,5 @@ if __name__ == '__main__':
 
             fo.close()
             print('{:<15}|{:>15} |{:>11} |{:>11} '.format(filename, str(n_m), opt, avg_runs))
-        break
-
-    # fo = open('tests/g07.graph', "rb")
-    # G = nx.read_edgelist(fo, nodetype=int)
-    # # print(len(nx.minimum_edge_cut(G)))
-    # opt = 100000000
-    # start = time.time()
-    #
-    # for i in range(30):
-    #     opt = min(opt, len(min_cut(G)))
     # end = time.time()
     # print(end - start)
-    # print(len(min_cut(G)))
-    # print(opt)
